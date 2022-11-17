@@ -4,7 +4,8 @@ import com.whiletrue.tododemo.dto.Task;
 import com.whiletrue.tododemo.dto.TaskResponse;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @RequestMapping("/tasks")
 public class TaskController {
 
-    private static Task hardcodedTask = new Task("test", "test description", LocalDateTime.now().plusDays(2), "system", "elena", true);
+    private static Task hardcodedTask = new Task("test", "test description", Instant.now().plus(2, ChronoUnit.DAYS), "system", "elena", true);
 
     @PostMapping
     public TaskResponse createTask(@RequestBody Task task) {
@@ -39,7 +40,7 @@ public class TaskController {
 
     @PutMapping("/{taskId}")
     public TaskResponse updateTask(@PathVariable("taskId") Long taskId,
-                           @RequestBody Task task) {
+                                   @RequestBody Task task) {
         // TODO create logic for updating in DB
         TaskResponse updatedTask = generateTaskResponse(task);
         return updatedTask;

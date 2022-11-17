@@ -2,18 +2,18 @@ package com.whiletrue.tododemo.dto;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 @Data
 public class Task {
 
     private String name;
     private String description;
-    private LocalDateTime dueDateTime;
+    private Instant dueDateTime;
     private String createdBy;
     private String assignedTo;
     private boolean completed;
 
-    public Task(String name, String description, LocalDateTime dueDateTime, String createdBy, String assignedTo, boolean completed) {
+    public Task(String name, String description, Instant dueDateTime, String createdBy, String assignedTo, boolean completed) {
         this.name = name;
         this.description = description;
         this.dueDateTime = dueDateTime;
