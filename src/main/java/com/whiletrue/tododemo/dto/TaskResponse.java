@@ -14,14 +14,14 @@ public class TaskResponse {
     private LocalDateTime created;
     private LocalDateTime updated;
 
-    public TaskResponse(Long id, String name, String description, LocalDateTime dueDateTime, String createdBy, String assignedTo, boolean completed) {
+    public TaskResponse(Long id, Task task) {
         this.id = id;
-        this.name = name;
-        this.description = description;
-        this.dueDateTime = dueDateTime;
-        this.createdBy = createdBy;
-        this.assignedTo = assignedTo;
-        this.completed = completed;
+        this.name = task.getName();
+        this.description = task.getDescription();
+        this.dueDateTime = task.getDueDateTime();
+        this.createdBy = task.getCreatedBy();
+        this.assignedTo = task.getAssignedTo();
+        this.completed = task.isCompleted();
         this.created = LocalDateTime.now();
         this.updated = LocalDateTime.now();
     }

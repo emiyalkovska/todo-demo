@@ -52,6 +52,7 @@ public class TaskController {
 
     private TaskResponse generateTaskResponse(Task task) {
         Long id = 1L;
-        return new TaskResponse(id, task.getName(), task.getDescription(), task.getDueDateTime(), task.getCreatedBy(), task.getAssignedTo(), task.isCompleted());
+        return new TaskResponse(id, task);
     }
+
 }
