@@ -1,7 +1,9 @@
 package com.whiletrue.tododemo.dto;
 
-import java.time.LocalDateTime;
+import lombok.Data;
 
+import java.time.LocalDateTime;
+@Data
 public class Task {
 
     private String name;
@@ -20,51 +22,4 @@ public class Task {
         this.completed = completed;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public LocalDateTime getDueDateTime() {
-        return dueDateTime;
-    }
-
-    public void setDueDateTime(LocalDateTime dueDateTime) {
-        this.dueDateTime = dueDateTime;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getAssignedTo() {
-        return assignedTo;
-    }
-
-    public void setAssignedTo(String assignedTo) {
-        this.assignedTo = assignedTo;
-    }
-
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
 }

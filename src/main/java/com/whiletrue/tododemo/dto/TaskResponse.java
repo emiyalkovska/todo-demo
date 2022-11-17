@@ -1,7 +1,10 @@
 package com.whiletrue.tododemo.dto;
 
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
+@Data
 public class TaskResponse {
 
     private Long id;
@@ -26,67 +29,4 @@ public class TaskResponse {
         this.updated = LocalDateTime.now();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public LocalDateTime getDueDateTime() {
-        return dueDateTime;
-    }
-
-    public void setDueDateTime(LocalDateTime dueDateTime) {
-        this.dueDateTime = dueDateTime;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getAssignedTo() {
-        return assignedTo;
-    }
-
-    public void setAssignedTo(String assignedTo) {
-        this.assignedTo = assignedTo;
-    }
-
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public LocalDateTime getUpdated() {
-        return updated;
-    }
 }
