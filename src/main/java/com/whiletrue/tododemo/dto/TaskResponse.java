@@ -1,5 +1,6 @@
 package com.whiletrue.tododemo.dto;
 
+import com.whiletrue.tododemo.entity.TaskEntity;
 import lombok.Data;
 
 import java.time.Instant;
@@ -18,14 +19,14 @@ public class TaskResponse {
     private LocalDateTime created;
     private LocalDateTime updated;
 
-    public TaskResponse(Long id, Task task) {
-        this.id = id;
-        this.name = task.getName();
-        this.description = task.getDescription();
-        this.dueDateTime = task.getDueDateTime();
-        this.createdBy = task.getCreatedBy();
-        this.assignedTo = task.getAssignedTo();
-        this.completed = task.isCompleted();
+    public TaskResponse(TaskEntity taskEntity) {
+        this.id = taskEntity.getId();
+        this.name = taskEntity.getName();
+        this.description = taskEntity.getDescription();
+        this.dueDateTime = taskEntity.getDueDateTime();
+        this.createdBy = taskEntity.getCreatedBy();
+        this.assignedTo = taskEntity.getAssignedTo();
+        this.completed = taskEntity.isCompleted();
         this.created = LocalDateTime.now();
         this.updated = LocalDateTime.now();
     }
