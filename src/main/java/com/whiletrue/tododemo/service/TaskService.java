@@ -1,10 +1,10 @@
 package com.whiletrue.tododemo.service;
 
-import com.whiletrue.tododemo.dto.Task;
+import com.whiletrue.tododemo.dto.TaskRequest;
 import com.whiletrue.tododemo.dto.TaskResponse;
 
 public interface TaskService {
 
-    TaskResponse createTask(Task task);
+    TaskResponse createTask(TaskRequest taskRequest);
 
 }

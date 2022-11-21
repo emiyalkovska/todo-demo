@@ -4,7 +4,7 @@ import lombok.Data;
 
 import java.time.Instant;
 @Data
-public class Task {
+public class TaskRequest {
 
     private String name;
     private String description;
@@ -13,7 +13,7 @@ public class Task {
     private String assignedTo;
     private boolean completed;
 
-    public Task(String name, String description, Instant dueDateTime, String createdBy, String assignedTo, boolean completed) {
+    public TaskRequest(String name, String description, Instant dueDateTime, String createdBy, String assignedTo, boolean completed) {
         this.name = name;
         this.description = description;
         this.dueDateTime = dueDateTime;

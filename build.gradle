@@ -13,13 +13,6 @@ repositories {
 	mavenCentral()
 }
 
-flyway {
-	url = 'jdbc:postgresql://localhost:5432/postgres'
-	schemas = ['todo']
-	user = 'postgres'
-	password = 'password'
-}
-
 flywayMigrate.dependsOn classes
 
 dependencies {

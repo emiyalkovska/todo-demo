@@ -1,6 +1,6 @@
 package com.whiletrue.tododemo.controller;
 
-import com.whiletrue.tododemo.dto.Task;
+import com.whiletrue.tododemo.dto.TaskRequest;
 import com.whiletrue.tododemo.dto.TaskResponse;
 import com.whiletrue.tododemo.service.TaskService;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +18,8 @@ public class TaskController {
     }
 
     @PostMapping
-    public TaskResponse createTask(@RequestBody Task task) {
-        TaskResponse response = taskService.createTask(task);
+    public TaskResponse createTask(@RequestBody TaskRequest taskRequest) {
+        TaskResponse response = taskService.createTask(taskRequest);
         return response;
     }
 
@@ -38,7 +38,7 @@ public class TaskController {
 
     @PutMapping("/{taskId}")
     public TaskResponse updateTask(@PathVariable("taskId") Long taskId,
-                                   @RequestBody Task task) {
+                                   @RequestBody TaskRequest taskRequest) {
         // TODO create logic for updating in DB
         return null;
     }

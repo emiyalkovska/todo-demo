@@ -1,6 +1,6 @@
 package com.whiletrue.tododemo.entity;
 
-import com.whiletrue.tododemo.dto.Task;
+import com.whiletrue.tododemo.dto.TaskRequest;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,10 +11,10 @@ import java.time.Instant;
 @Entity
 @Table(name = "task")
 @NoArgsConstructor
-public class TaskEntity {
+public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
 
@@ -36,13 +36,13 @@ public class TaskEntity {
     @Column(name = "completed")
     private boolean completed;
 
-    public TaskEntity(Long id, Task task) {
+    public Task(Long id, TaskRequest taskRequest) {
         this.id = id;
-        this.name = task.getName();
-        this.description = task.getDescription();
-        this.dueDateTime = task.getDueDateTime();
-        this.createdBy = task.getCreatedBy();
-        this.assignedTo = task.getAssignedTo();
-        this.completed = task.isCompleted();
+        this.name = taskRequest.getName();
+        this.description = taskRequest.getDescription();
+        this.dueDateTime = taskRequest.getDueDateTime();
+        this.createdBy = taskRequest.getCreatedBy();
+        this.assignedTo = taskRequest.getAssignedTo();
+        this.completed = taskRequest.isCompleted();
     }
 }

@@ -1,8 +1,8 @@
 package com.whiletrue.tododemo.service.impl;
 
-import com.whiletrue.tododemo.dto.Task;
+import com.whiletrue.tododemo.dto.TaskRequest;
 import com.whiletrue.tododemo.dto.TaskResponse;
-import com.whiletrue.tododemo.entity.TaskEntity;
+import com.whiletrue.tododemo.entity.Task;
 import com.whiletrue.tododemo.repository.TaskRepository;
 import com.whiletrue.tododemo.service.TaskService;
 import org.springframework.stereotype.Service;
@@ -17,17 +17,17 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskResponse createTask(Task task) {
+    public TaskResponse createTask(TaskRequest taskRequest) {
 
-        TaskEntity taskEntity = new TaskEntity();
-        taskEntity.setName(task.getName());
-        taskEntity.setDescription(task.getDescription());
-        taskEntity.setDueDateTime(task.getDueDateTime());
-        taskEntity.setCreatedBy(task.getCreatedBy());
-        taskEntity.setAssignedTo(task.getAssignedTo());
-        taskEntity.setCompleted(task.isCompleted());
+        Task task = new Task();
+        task.setName(taskRequest.getName());
+        task.setDescription(taskRequest.getDescription());
+        task.setDueDateTime(taskRequest.getDueDateTime());
+        task.setCreatedBy(taskRequest.getCreatedBy());
+        task.setAssignedTo(taskRequest.getAssignedTo());
+        task.setCompleted(taskRequest.isCompleted());
 
-        taskRepository.save(taskEntity);
-        return new TaskResponse(taskEntity);
+        taskRepository.save(task);
+        return new TaskResponse(task);
     }
 }
