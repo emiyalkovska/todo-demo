@@ -58,7 +58,7 @@ public class TaskServiceImpl implements TaskService {
             TaskResponse taskResponse = new TaskResponse(task.get());
             return taskResponse;
         } else {
-            throw new TaskNotFoundException("Task", "id", taskId);
+            throw new TaskNotFoundException(taskId);
         }
     }
 
@@ -69,7 +69,7 @@ public class TaskServiceImpl implements TaskService {
         Optional<Task> taskOptional = taskRepository.findById(taskId);
 
         if (taskOptional.isEmpty()) {
-            throw new TaskNotFoundException("Task", "id", taskId);
+            throw new TaskNotFoundException(taskId);
         }
 
         Task task = taskOptional.get();
@@ -92,7 +92,7 @@ public class TaskServiceImpl implements TaskService {
         Optional<Task> taskOptional = taskRepository.findById(taskId);
 
         if (taskOptional.isEmpty()) {
-            throw new TaskNotFoundException("Task", "id", taskId);
+            throw new TaskNotFoundException(taskId);
         }
 
         taskRepository.deleteById(taskId);
