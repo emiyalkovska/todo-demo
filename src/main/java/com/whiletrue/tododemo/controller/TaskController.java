@@ -5,7 +5,6 @@ import com.whiletrue.tododemo.dto.TaskResponse;
 import com.whiletrue.tododemo.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,9 +24,7 @@ public class TaskController {
 
     @GetMapping
     public List<TaskResponse> getTasks() {
-        // TODO create logic for retrieving tasks from DB
-        List<TaskResponse> tasks = new ArrayList<>();
-        return tasks;
+        return taskService.getTasks();
     }
 
     @GetMapping("/{taskId}")

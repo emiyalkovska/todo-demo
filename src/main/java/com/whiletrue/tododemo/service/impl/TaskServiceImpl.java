@@ -7,6 +7,9 @@ import com.whiletrue.tododemo.repository.TaskRepository;
 import com.whiletrue.tododemo.service.TaskService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class TaskServiceImpl implements TaskService {
 
@@ -29,5 +32,18 @@ public class TaskServiceImpl implements TaskService {
 
         taskRepository.save(task);
         return new TaskResponse(task);
+    }
+
+    @Override
+    public List<TaskResponse> getTasks() {
+        List<Task> tasks = taskRepository.findAll();
+        List<TaskResponse> taskResponses = new ArrayList<>();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            TaskResponse taskResponse = new TaskResponse(task);
+            taskResponses.add(taskResponse);
+        }
+        return taskResponses;
     }
 }
