@@ -29,15 +29,13 @@ public class TaskController {
 
     @GetMapping("/{taskId}")
     public TaskResponse getTask(@PathVariable("taskId") Long taskId) {
-        // TODO create logic for retrieving task from DB
-        return null;
+        return taskService.getTask(taskId);
     }
 
     @PutMapping("/{taskId}")
     public TaskResponse updateTask(@PathVariable("taskId") Long taskId,
                                    @RequestBody TaskRequest taskRequest) {
-        // TODO create logic for updating in DB
-        return null;
+        return taskService.updateTask(taskId, taskRequest);
     }
 
     @DeleteMapping("/{taskId}")
