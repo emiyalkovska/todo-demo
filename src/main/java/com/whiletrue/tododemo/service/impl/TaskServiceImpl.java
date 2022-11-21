@@ -86,4 +86,16 @@ public class TaskServiceImpl implements TaskService {
         return updatedTask;
     }
 
+    @Override
+    public void deleteTask(Long taskId) {
+        //first check whether task with given id exist in DB OR not
+        Optional<Task> taskOptional = taskRepository.findById(taskId);
+
+        if (taskOptional.isEmpty()) {
+            throw new TaskNotFoundException("Task", "id", taskId);
+        }
+
+        taskRepository.deleteById(taskId);
+    }
+
 }

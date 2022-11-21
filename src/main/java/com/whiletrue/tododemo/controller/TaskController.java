@@ -40,6 +40,6 @@ public class TaskController {
 
     @DeleteMapping("/{taskId}")
     public void deleteTask(@PathVariable("taskId") Long taskId) {
-        // TODO create logic for deleting from DB
+        taskService.deleteTask(taskId);
     }
 }
