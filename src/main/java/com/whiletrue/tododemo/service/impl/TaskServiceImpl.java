@@ -49,7 +49,7 @@ public class TaskServiceImpl implements TaskService {
     public TaskResponse getTask(Long taskId) {
 
         Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task with id=" + taskId + " not found!"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Task with id=%d not found!", taskId)));
 
         return new TaskResponse(task);
     }
@@ -58,7 +58,7 @@ public class TaskServiceImpl implements TaskService {
     public TaskResponse updateTask(Long taskId, TaskRequest taskRequest) {
 
         Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task with id=" + taskId + " not found!"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Task with id=%d not found!", taskId)));
 
         task.setName(taskRequest.getName());
         task.setDescription(taskRequest.getDescription());
@@ -74,7 +74,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void deleteTask(Long taskId) {
         Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task with id=" + taskId + " not found!"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Task with id=%d not found!", taskId)));
 
         taskRepository.deleteById(task.getId());
     }
