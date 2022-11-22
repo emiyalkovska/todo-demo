@@ -8,9 +8,9 @@ import com.whiletrue.tododemo.repository.TaskRepository;
 import com.whiletrue.tododemo.service.TaskService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -39,13 +39,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<TaskResponse> getTasks() {
         List<Task> tasks = taskRepository.findAll();
-        List<TaskResponse> taskResponses = new ArrayList<>();
+        List<TaskResponse> taskResponses = tasks.stream()
+                .map(TaskResponse::new)
+                .collect(Collectors.toList());
 
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            TaskResponse taskResponse = new TaskResponse(task);
-            taskResponses.add(taskResponse);
-        }
         return taskResponses;
     }
 
