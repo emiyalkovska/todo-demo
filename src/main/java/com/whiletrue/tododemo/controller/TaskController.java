@@ -5,7 +5,6 @@ import com.whiletrue.tododemo.dto.TaskResponse;
 import com.whiletrue.tododemo.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,26 +24,22 @@ public class TaskController {
 
     @GetMapping
     public List<TaskResponse> getTasks() {
-        // TODO create logic for retrieving tasks from DB
-        List<TaskResponse> tasks = new ArrayList<>();
-        return tasks;
+        return taskService.getTasks();
     }
 
     @GetMapping("/{taskId}")
     public TaskResponse getTask(@PathVariable("taskId") Long taskId) {
-        // TODO create logic for retrieving task from DB
-        return null;
+        return taskService.getTask(taskId);
     }
 
     @PutMapping("/{taskId}")
     public TaskResponse updateTask(@PathVariable("taskId") Long taskId,
                                    @RequestBody TaskRequest taskRequest) {
-        // TODO create logic for updating in DB
-        return null;
+        return taskService.updateTask(taskId, taskRequest);
     }
 
     @DeleteMapping("/{taskId}")
     public void deleteTask(@PathVariable("taskId") Long taskId) {
-        // TODO create logic for deleting from DB
+        taskService.deleteTask(taskId);
     }
 }
