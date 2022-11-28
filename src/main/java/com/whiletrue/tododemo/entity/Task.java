@@ -18,6 +18,10 @@ public class Task {
     @Column(name = "id")
     private Long id;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
     @Column(name = "name")
     private String name;
 
@@ -27,22 +31,15 @@ public class Task {
     @Column(name = "due_date_time")
     private Instant dueDateTime;
 
-    @Column(name = "created_by")
-    private String createdBy;
-
-    @Column(name = "assigned_to")
-    private String assignedTo;
-
     @Column(name = "completed")
     private boolean completed;
 
-    public Task(Long id, TaskRequest taskRequest) {
-        this.id = id;
+    public Task(TaskRequest taskRequest, User user) {
         this.name = taskRequest.getName();
         this.description = taskRequest.getDescription();
         this.dueDateTime = taskRequest.getDueDateTime();
-        this.createdBy = taskRequest.getCreatedBy();
-        this.assignedTo = taskRequest.getAssignedTo();
         this.completed = taskRequest.isCompleted();
+        this.user = user;
     }
+
 }
