@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
@@ -29,11 +28,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserResponse createUser(UserRequest userRequest) {
 
-        User user = new User();
-        user.setFirstName(userRequest.getFirstName());
-        user.setLastName(userRequest.getLastName());
-        user.setUsername(userRequest.getUsername());
-        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        String hashedPassword = passwordEncoder.encode(userRequest.getPassword());
+        userRequest.setPassword(hashedPassword);
+
+        User user = new User(userRequest);
 
         userRepository.save(user);
 

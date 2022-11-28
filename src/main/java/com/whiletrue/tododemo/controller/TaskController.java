@@ -18,8 +18,7 @@ public class TaskController {
 
     @PostMapping
     public TaskResponse createTask(@RequestBody TaskRequest taskRequest) {
-        TaskResponse response = taskService.createTask(taskRequest);
-        return response;
+        return taskService.createTask(taskRequest);
     }
 
     @GetMapping

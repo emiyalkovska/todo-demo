@@ -1,5 +1,6 @@
 package com.whiletrue.tododemo.entity;
 
+import com.whiletrue.tododemo.dto.UserRequest;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,11 +29,10 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    public User(Long id, String firstName, String lastName, String username, String password) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
+    public User(UserRequest userRequest) {
+        this.firstName = userRequest.getFirstName();
+        this.lastName = userRequest.getLastName();
+        this.username = userRequest.getUsername();
+        this.password = userRequest.getPassword();
     }
 }
