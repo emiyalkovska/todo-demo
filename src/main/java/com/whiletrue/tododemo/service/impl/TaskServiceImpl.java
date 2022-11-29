@@ -3,9 +3,13 @@ package com.whiletrue.tododemo.service.impl;
 import com.whiletrue.tododemo.dto.TaskRequest;
 import com.whiletrue.tododemo.dto.TaskResponse;
 import com.whiletrue.tododemo.entity.Task;
+import com.whiletrue.tododemo.entity.User;
 import com.whiletrue.tododemo.repository.TaskRepository;
+import com.whiletrue.tododemo.repository.UserRepository;
 import com.whiletrue.tododemo.service.TaskService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -16,21 +20,20 @@ import java.util.stream.Collectors;
 public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
+    private final UserRepository userRepository;
 
-    public TaskServiceImpl(TaskRepository taskRepository) {
+    public TaskServiceImpl(TaskRepository taskRepository,
+                           UserRepository userRepository) {
         this.taskRepository = taskRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public TaskResponse createTask(TaskRequest taskRequest) {
 
-        Task task = new Task();
-        task.setName(taskRequest.getName());
-        task.setDescription(taskRequest.getDescription());
-        task.setDueDateTime(taskRequest.getDueDateTime());
-        task.setCreatedBy(taskRequest.getCreatedBy());
-        task.setAssignedTo(taskRequest.getAssignedTo());
-        task.setCompleted(taskRequest.isCompleted());
+        User user = getAuthorizedUser();
+
+        Task task = new Task(taskRequest, user);
 
         taskRepository.save(task);
         return new TaskResponse(task);
@@ -38,7 +41,10 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskResponse> getTasks() {
-        List<Task> tasks = taskRepository.findAll();
+
+        User user = getAuthorizedUser();
+
+        List<Task> tasks = user.getTasks();
 
         return tasks.stream()
                 .map(TaskResponse::new)
@@ -63,7 +69,6 @@ public class TaskServiceImpl implements TaskService {
         task.setName(taskRequest.getName());
         task.setDescription(taskRequest.getDescription());
         task.setDueDateTime(taskRequest.getDueDateTime());
-        task.setAssignedTo(taskRequest.getAssignedTo());
         task.setCompleted(taskRequest.isCompleted());
 
         taskRepository.save(task);
@@ -77,6 +82,14 @@ public class TaskServiceImpl implements TaskService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Task with id=%d not found!", taskId)));
 
         taskRepository.deleteById(task.getId());
+    }
+
+    private User getAuthorizedUser() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        return userRepository.findByUsername(username);
     }
 
 }
