@@ -24,8 +24,8 @@ class UserControllerTest {
     }
 
     @Test
-    void registerUser() {
-        UserRequest userRequest = new UserRequest("firstNameTest", "lastNameTest", "usernameTest", "passwordTest");
+    void createUser() {
+        UserRequest userRequest = new UserRequest("firstNameTest", "lastNameTest", "test1", "test1");
 
         with().body(userRequest)
                 .contentType(ContentType.JSON)
